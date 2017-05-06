@@ -1,0 +1,86 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context=".MainActivity" >-->
+
+    <!--<GridView-->
+        <!--android:id="@+id/gridViewCustom"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="550dp"-->
+        <!--android:columnWidth="350dp"-->
+        <!--android:numColumns="2"-->
+        <!--android:stretchMode="columnWidth"-->
+        <!--android:gravity="center"-->
+        <!--/>-->
+        <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_margin="4dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:columnWidth="80dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:numColumns="auto_fit"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:stretchMode="columnWidth"&ndash;&gt;-->
+
+
+
+<!--</LinearLayout>-->
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="530dp"
+        android:id="@+id/frameclipping">
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="480dp">
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridViewCustom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="170dp"
+        android:numColumns="1"
+        android:stretchMode="none"
+        android:gravity="left"/>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:id="@+id/txtEmpty"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        android:textColor="@android:color/black"
+        android:text="No clippings "
+        android:layout_height="match_parent" />
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/frameclipping">
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/fab_add"
+        fab:fab_colorNormal="@color/black"
+        fab:fab_colorPressed="@color/colorWhite"
+        fab:fab_colorRipple="@color/black"/>
+</FrameLayout>
+</RelativeLayout>

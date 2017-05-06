@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "1037900536576",
+    "project_id": "teak-passage-132116"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037900536576:android:ac797b03fc4cad42",
+        "android_client_info": {
+          "package_name": "com.sharedclipboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCelouJsT1z9hyhZtUlv9ACwDFOD-_y7lg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

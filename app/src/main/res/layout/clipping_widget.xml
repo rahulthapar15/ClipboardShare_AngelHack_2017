@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#09C"
+    android:padding="@dimen/widget_margin">
+    <TextView
+        android:id="@+id/txtC"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+    <FrameLayout
+        android:id="@+id/fl1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@id/txtC"
+        android:background="@android:color/holo_red_light"
+        android:layout_toLeftOf="@+id/txtC"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="12"
+            android:maxLength="80"
+            android:layout_margin="8dp"
+            android:text="An aging musical group calls it quits, but demonstrates that its music is timeless."
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/fl2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/holo_green_light"
+        android:layout_toRightOf="@+id/txtC"
+        android:layout_above="@+id/txtC"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/txt2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:maxLines="12"
+            android:ellipsize="end"
+            android:maxLength="80"
+            android:text="Flight 804, carrying 66 people en route to Cairo from Paris, disappeared shortly before it was due to land. The reason was unclear, but the developments touched off fears about terrorism."
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/fl3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/holo_blue_dark"
+        android:layout_toLeftOf="@+id/txtC"
+        android:layout_below="@+id/txtC"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txt3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:maxLines="12"
+            android:ellipsize="end"
+            android:maxLength="80"
+            android:text="An overwhelming majority of Republican voters say their party’s leaders should get behind Donald J. Trump, according to the latest Times/CBS News poll."
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/fl4"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/holo_orange_light"
+        android:layout_toRightOf="@+id/txtC"
+        android:layout_below="@+id/txtC"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/psm_talking_on_phone2"/>
+        <TextView
+            android:id="@+id/txt4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="visible"
+            android:maxLines="12"
+            android:layout_margin="8dp"
+            android:text="clip4"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+    </FrameLayout>
+
+</RelativeLayout>

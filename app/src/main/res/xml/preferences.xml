@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Web ID">
+
+        <PreferenceScreen
+            android:title="Unknown"
+            android:key="passcode">
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Email">
+        <PreferenceScreen
+            android:title="sample@sample.com"
+            android:key="email">
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Account Settings">
+
+        <PreferenceScreen
+            android:title="Logout"
+            android:key="logout"
+            android:summary="Log out from you current session. Your account will not be deleted.">
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+   <!-- <PreferenceCategory
+        android:title="Help">
+        <PreferenceScreen
+            android:title="Click here to launch the app tutorial!"
+            android:key="help">
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="About us">
+        <PreferenceScreen
+            android:title="Click here to launch the app webpage."
+            android:key="about">
+        </PreferenceScreen>
+    </PreferenceCategory>-->
+
+</PreferenceScreen>

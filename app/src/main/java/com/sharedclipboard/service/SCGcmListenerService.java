@@ -1,0 +1,118 @@
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ * <p/>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.sharedclipboard.service;
+
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
+
+import com.google.android.gms.gcm.GcmListenerService;
+import com.sharedclipboard.MainActivity;
+import com.sharedclipboard.R;
+import com.sharedclipboard.storage.preferences.PreferenceUtils;
+
+
+public class SCGcmListenerService extends GcmListenerService {
+
+    private static final String TAG = "VVV";
+    public static final String BROADCAST_TYPE_DATA_UPDATE = "broadcast_data_update";
+    public static final String KEY_EVENT_TYPE = "key_event_type";
+    public static final String KEY_IDS = "ids";
+    public static final String TYPE_DELETE = "delete";
+    /*{"key_event_type" : "delete","ids":[1,2]}*/
+    /**
+     * Called when message is received.
+     *
+     * @param from SenderID of the sender.
+     * @param data Data bundle containing message data as key/value pairs.
+     *             For Set of keys use data.keySet().
+     */
+    // [START receive_message]
+    @Override
+    public void onMessageReceived(String from, Bundle data) {
+        String message = data.getString("message");
+        Log.d(TAG, "From: " + from);
+        Log.d(TAG, "Message: " + message);
+        if(PreferenceUtils.getString(getBaseContext(),PreferenceUtils.PREF_PASSCODE,null) != null) {
+            try {
+                int indexStart = message.indexOf("_");
+                if (indexStart > 0) {
+                    String time = message.substring(0, indexStart);
+                    long time_l = Long.parseLong(time);
+                    String clip = message.substring(indexStart + 1);
+                    ClipListenerService.addNewClip(getBaseContext(), clip, time_l);
+                }
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+
+        // [START_EXCLUDE]
+        /**
+         * Production applications would usually process the message here.
+         * Eg: - Syncing with server.
+         *     - Store message in local database.
+         *     - Update UI.
+         */
+
+        /**
+         * In some cases it may be useful to show a notification indicating to the user
+         * that a message was received.
+         */
+        //sendNotification(message);
+        // [END_EXCLUDE]
+    }
+
+    private void sendDataUpdateBroadcast() {
+        Intent syncComplete = new Intent(BROADCAST_TYPE_DATA_UPDATE);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(syncComplete);
+    }
+    // [END receive_message]
+
+    /**
+     * Create and show a simple notification containing the received GCM message.
+     *
+     * @param message GCM message received.
+     */
+    private void sendNotification(String message) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.common_ic_googleplayservices)
+                .setContentTitle("GCM Message")
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+}
