@@ -3,6 +3,7 @@ package com.sharedclipboard.ui.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -15,9 +16,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,6 +37,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sharedclipboard.AngelHackInfo;
 import com.sharedclipboard.MainActivity;
 import com.sharedclipboard.R;
 import com.sharedclipboard.network.NetworkUtils;
@@ -47,7 +53,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
 import static android.Manifest.permission.READ_CONTACTS;
+import static com.sharedclipboard.R.id.fab;
 
 /**
  * A login screen that offers login via email/password.
@@ -56,6 +67,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private String loginEndpoint = NetworkUtils.SERVER_URL + "login.do";
 
+    @InjectView(R.id.email_1)
+    EditText etUsername;
+    @InjectView(R.id.password_1)
+    EditText etPassword;
+    @InjectView(R.id.go)
+    Button btGo;
+    @InjectView(R.id.cv)
+    CardView cv;
+    @InjectView(R.id.fab)
+    FloatingActionButton fab;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -74,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private EditText mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -88,12 +109,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }else {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            setContentView(R.layout.activity_login);
+            setContentView(R.layout.activity_login_1);
+            ButterKnife.inject(this);
             // Set up the login form.
-            mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+            mEmailView = (EditText) findViewById(R.id.email_1);
             populateAutoComplete();
 
-            mPasswordView = (EditText) findViewById(R.id.password);
+            mPasswordView = (EditText) findViewById(R.id.password_1);
             mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -105,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             });
 
-            Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+            Button mEmailSignInButton = (Button) findViewById(R.id.go);
             mEmailSignInButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -117,6 +139,38 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mProgressView = findViewById(R.id.login_progress);
         }
     }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @OnClick({R.id.go, R.id.fab})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fab:
+                getWindow().setExitTransition(null);
+                getWindow().setEnterTransition(null);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options =
+                            ActivityOptions.makeSceneTransitionAnimation(this, fab, fab.getTransitionName());
+                    startActivity(new Intent(LoginActivity.this, AngelHackInfo.class), options.toBundle());
+                } else {
+                    startActivity(new Intent(LoginActivity.this, AngelHackInfo.class));
+                }
+                break;
+            case R.id.go:
+                Explode explode = new Explode();
+                explode.setDuration(500);
+
+                getWindow().setExitTransition(explode);
+                getWindow().setEnterTransition(explode);
+                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+                Intent i2 = new Intent(this,MainActivity.class);
+                startActivity(i2, oc2.toBundle());
+                break;
+        }
+    }
+
+
+
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -229,7 +283,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+      /*  // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
@@ -257,7 +311,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+        }*/
     }
 
     @Override
@@ -300,7 +354,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+     //   mEmailView.setAdapter(adapter);
     }
 
 

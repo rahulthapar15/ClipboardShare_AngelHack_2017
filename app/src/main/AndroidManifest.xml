@@ -20,12 +20,11 @@
 
     <application
         android:name=".SharedClipperApp"
-        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.gms.version"
@@ -39,8 +38,8 @@
         <activity
             android:name=".ui.activity.SettingsActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver android:name=".ui.widget.ClippingWidget">
@@ -52,11 +51,12 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/clipping_widget_info" />
         </receiver>
+
         <activity
             android:name=".ui.activity.ScreenSlideActivity"
-            android:theme="@style/MyTheme"
+            android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:label="@string/app_name">
+            android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,10 +65,9 @@
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
-        android:windowSoftInputMode="stateVisible|adjustPan"
+            android:label=""
             android:theme="@style/MyTheme"
-            android:label="">
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustPan"></activity>
 
         <service
             android:name=".service.ClipListenerService"
@@ -116,8 +115,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/MyTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -134,6 +133,9 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sharedclipboard.MainActivity" />
+        </activity>
+        <activity android:name=".AngelHackInfo"
+            android:theme="@style/MyTheme">
         </activity>
     </application>
 
