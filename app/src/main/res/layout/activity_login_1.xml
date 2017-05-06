@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         app:fabSize="normal"
         android:background="@color/black"
-        android:src="@drawable/plus"
+        android:src="@drawable/help"
         android:transitionName="loginFab"
         android:layout_alignTop="@id/cv"
         android:layout_marginTop="25dp"
