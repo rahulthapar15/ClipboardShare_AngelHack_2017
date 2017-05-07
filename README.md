@@ -20,4 +20,9 @@ Simply Ctrl+C on your desktop and directly paste it on your phone.
  ##### SCREENSHOTS
  ---
  
+ 1. [Login](Screenshots/login.png)
+ 2. [Main Screen](Screenshots/mainscreen.png)
+ 3. [Widget Support](Screenshots/widget.png)
+ 4. [Clipping Screen](Screenshots/clippings.png)
+ 5. [Tried iOS7 bottom sheet for Android](Screenshots/easynavigation.png)
 
